@@ -1,11 +1,11 @@
 const { ExpressReceiver } = require('@slack/bolt');
-const { express: { app } } = require('../app');
+const { express, app } = require('../app');
 
 const Router = () => (new ExpressReceiver({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
   })).router;
   
-  module.exports = Router;
+  module.exports = {Router, app};
 
-  app.use('/auth', require('./auth'));
+  express.app.use('/auth', require('./auth'));
   
